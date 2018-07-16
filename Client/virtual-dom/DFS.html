@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>DFS深度优先遍历</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let arr = [];
+			let num = 0;
+			function DFS(tree){
+				for(let name in tree){
+					if(tree.hasOwnProperty(name)){
+						num++;
+						arr.push(num+name);
+					}
+					if(Object.getOwnPropertyNames(tree[name]).length>0){
+						DFS(tree[name]);
+					}
+				}
+				return;
+			}
+			let tree = {
+				A:{
+					B:{
+						D:'',
+						E:{
+							H:''
+						}
+					},
+					C:{
+						F:{
+							I:'',
+							J:''
+						},
+						G:''
+					}
+				}
+			}
+			DFS(tree);
+			console.log(arr);
+		</script>
+	</body>
+</html>

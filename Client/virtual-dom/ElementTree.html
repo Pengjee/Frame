@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>虚拟DOM原生实现</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Element(tagName,props,children){
+				let dom = document.createElement(tagName);
+				for(let propsName in props){
+					if(props.hasOwnProperty(propsName)){
+						dom.setAttribute(propsName,props[propsName]);
+					}
+				}
+				if(children.length>1){
+					children.forEach((item)=>{
+						let children = Element(item.tagName,item.props,item.children);
+						dom.appendChild(children);
+					});
+				}else{
+					let text = document.createTextNode(children);
+					dom.appendChild(text);
+				}
+				return dom;
+			}
+			const a = Element('ul', {id: 'list'},[]);
+			document.body.appendChild(a);
+			console.log(document.getElementById('list'));
+		</script>
+	</body>
+</html>

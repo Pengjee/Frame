@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<button onclick="render()">点击</button>
+		<div id="root"></div>
+		<script type="text/javascript" src="setAttribute.js"></script>
+		<script type="text/javascript" src="diff.js"></script>
+		<script type="text/javascript">
+			function render(){
+				let dom = {
+					tagName:'ul',
+					props:{
+						id:'ul_list'
+					},
+					children: []
+				}
+				let vdom = {
+					tagName:'ul',
+					props:{
+						id:'ul_lis'
+					},
+					children: []
+				}
+				const container = document.getElementById('root');
+				const result = diff(dom,vdom,container);
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,86 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: swagger example
+consumes:
+  - application/json
+produces:
+  - application/json
+basePath: /api
+paths:
+  /user/{userId}:
+    get:
+      tags:
+        - User
+      description: find a user by userId
+      x-think-cache:
+        expire: 86400
+      x-think-controller:
+        - file: people
+          handler: getPeople
+      parameters:
+        - name: token
+          in: header
+          type: string
+          required: true
+          pattern: token.*
+          description: token in http header.
+        - name: userId
+          in: path
+          required: true
+          type: number
+          format: int32
+      responses:
+        200:
+          description: user's info
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  User:
+    title: user
+    type: object
+    required:
+      - name
+      - sex
+      - height
+      - weight
+    properties:
+      name:
+        type: string
+      sex:
+        type: string
+        enum:
+          - male
+          - female
+      height:
+        type: integer
+        format: int32
+        minimum: 10
+        maximum: 100
+      weight:
+        type: number
+        format: float
+        minimum: 10
+        maximum: 100
+      mobile:
+        type: string
+  Error:
+    title: Error
+    type: object
+    required:
+      - status
+      - error
+    properties:
+      status:
+        type: integer
+      type:
+        type: string
+      path:
+        type: string
+      error:
+        type: string
+      detail:
+        type: object
