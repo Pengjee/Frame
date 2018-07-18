@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { Form,Input,Button,Select,Row,Col,Alert } from 'antd';
-import {FormItemLayoutPage} from "../../config/config";
+import { FormItemLayoutPage,SearchFormLayout,SearchBtnLayout } from '../../config/config';
 import styles from '../../theme/table.less';
 
 const FormItem = Form.Item;
@@ -45,9 +45,9 @@ class SearchForm extends Component{
         return(
           <Row>
             <Form className={styles.searchBox}>
-              <Col span={6}>
+              <Col {...SearchFormLayout}>
                 <FormItem
-                  {...formItemLayout}
+                    {...FormItemLayoutPage}
                   label="部门名称"
                 >
                   {getFieldDecorator('name', {
@@ -58,9 +58,9 @@ class SearchForm extends Component{
                 )}
                 </FormItem>
               </Col>
-              <Col span={6}>
+              <Col {...SearchFormLayout}>
                 <FormItem
-                  {...formItemLayout}
+                  {...FormItemLayoutPage}
                   label="部门缩写"
                 >
                   {getFieldDecorator('abridge', {
@@ -71,9 +71,9 @@ class SearchForm extends Component{
                     )}
                 </FormItem>
               </Col>
-              <Col span={6}>
+              <Col {...SearchFormLayout}>
                 <FormItem
-                  {...formItemLayout}
+                  {...FormItemLayoutPage}
                   label="是否启用"
                 >
                   {getFieldDecorator('status', {
@@ -87,18 +87,17 @@ class SearchForm extends Component{
                     )}
                 </FormItem>
               </Col>
-              <Col span={6}>
-                <FormItem
-                  {...formItemLayout}
-                  style={{margin:0}}
-                  className={styles.btnBox}
-                >
-                  <div>
-                    <Button onClick={this.restSearchForm}>重置</Button>
-                    <Button onClick={this.searchList} type="primary" icon="search">搜索</Button>
-                  </div>
-                </FormItem>
-              </Col>
+                <Row >
+                    <Col {...SearchBtnLayout}>
+                        <div
+                            style={{ margin: 0 }}
+                            className={styles.btnBox}
+                        >
+                            <Button onClick={this.restSearchForm}>重置</Button>
+                            <Button onClick={this.searchList} type="primary" icon="search">搜索</Button>
+                        </div>
+                    </Col>
+                </Row>
             </Form>
           </Row>
         );

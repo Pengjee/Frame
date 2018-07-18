@@ -22,20 +22,8 @@ export default {
     searchInfo : {}, // 检索Form表单
   },
   subscriptions: {
-      setup({dispatch,history}) {
-          history.listen((location) => {
-              if(location.pathname  === '/list/advancelist'){
-                  dispatch({
-                      type:'listpage',
-                      payload:{
-                          page:1,
-                          pageSize:10,
-                      },
-                  })
-              }
-          });
-      },
-    },
+
+  },
   effects: {
     *add({ payload }, { call, put }) {
       const response = yield call(departmentAdd, payload);

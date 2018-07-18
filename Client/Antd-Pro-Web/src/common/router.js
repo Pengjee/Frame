@@ -72,17 +72,9 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
-    '/list/commonlist': {
-        component: dynamicWrapper(app, [], () => import('../routes/CommonList/CommonList')),
-    },
     '/list/advancelist': {
-          component: dynamicWrapper(app, ['department'], () => import('../routes/AdvanceList/AdvanceList')),
+          component: dynamicWrapper(app, ['department'], () => import('../routes/AdvanceList')),
     },
-    '/accept': {
-        component: dynamicWrapper(app, [], () => import('../routes/CommonList/PageForm')),
-    },
-
-
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },
@@ -94,9 +86,6 @@ export const getRouterData = app => {
     },
     '/user/register-result': {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
-    },
-    '/basicdata/department': {
-      component: dynamicWrapper(app, ['department'], () => import('../routes/Department')),
     },
 
   };

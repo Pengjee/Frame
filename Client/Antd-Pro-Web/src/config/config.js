@@ -35,27 +35,60 @@ export const FormItemLayoutModal = {
         sm: { span: 4 },
     },
     wrapperCol: {
-        xs: { span: 24 },
+        xs: { span: 20 },
         sm: { span: 19 },
     },
-}
+};
 
-export const FormItemLayoutPage = {
+export const FormItemLayoutModal1 = {
     labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 },
+        sm: { span: 5},
     },
     wrapperCol: {
         xs: { span: 20 },
-        sm: { span: 16 },
+        sm: { span: 10},
     },
+};
+
+//  页面的布局
+export const SearchFormLayout = {
+    xs:{span:24},
+    sm:{span:12},
+    md:{span:12},
+    lg:{span:8},
+}
+// 搜索按钮的布局
+export const SearchBtnLayout = {
+    xs:{span:24},
+    sm:{span:12,offset:12},
+    md:{span:12,offset:12},
+    lg:{span:8,offset:16},
 }
 
+//  每个输入框和lable的布局
+export const FormItemLayoutPage = {
+    labelCol: {
+        xs: { span:7 },
+        sm: { span: 7 },
+        md: { span:7 },
+        lg: { span: 7 },
+    },
+    wrapperCol: {
+        xs: { span: 17 },
+        sm: { span: 17 },
+        md: { span: 17 },
+        lg: { span: 17 },
+    },
+};
+
 export default {
-  LoginConfig,
-  PageHeaderConfig,
-  FormItemLayoutModal,
-  FormItemLayoutPage,
+    LoginConfig,
+    PageHeaderConfig,
+    FormItemLayoutModal,
+    FormItemLayoutPage,
+    SearchFormLayout,
+    SearchBtnLayout,
 };
 
 

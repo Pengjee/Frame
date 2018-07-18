@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
-import {  Card,Form,Button,Modal } from 'antd';
+import {  Card,Form,Modal } from 'antd';
 import { connect } from 'dva';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import AutoList from '../../components/List/List';
 import AdvanceForm from './AdvanceForm';
+import ToolBar from '../../components/ToolBar';
 import SearchForm from './SearchForm';
-import styles from '../../theme/table.less';
 
 const confirm = Modal.confirm;
 
@@ -158,6 +158,13 @@ class AdvanceList extends Component{
         const { department:{dataSource,visible,currentRow,searchInfo,pagination} } = this.props;
         const { form } = this.props;
         const { handleTitle } = this.state;
+        const BtnList = [{
+            icon:'plus',
+            name:'新增',
+            type:'',
+            key:'1',
+            click:this.add,
+        }];
         const pageProps = {
           dataSource,
           columsList:{
@@ -217,11 +224,11 @@ class AdvanceList extends Component{
         }
         return(
           <PageHeaderLayout>
-            <Card bordered={false}>
+            <Card title="快速查询" bordered={false} style={{marginBottom:'20px'}}>
               <SearchForm {...searchProps}  />
-              <div className={styles.toolbox}>
-                <Button icon="plus" type="primary" onClick={this.add}>新增</Button>
-              </div>
+            </Card>
+            <Card bordered={false}>
+              <ToolBar BtnList={BtnList} />
               <AutoList {...pageProps} turnPage={this.turnPage} />
               <AdvanceForm {...modalProps}  />
             </Card>
