@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>渐入渐出Loading</title>
+	</head>
+	<style type="text/css">
+		body{
+			margin:0;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color:black;
+		}
+		.loader{
+			width: 40em;
+			height:3em;
+		}
+		.loader{
+			color: dodgerblue;
+			font: 1.5em;
+			text-transform: uppercase;
+			font-family: sans-serif;
+		}
+		.loader span{
+			animation: moving 2s linear infinite;
+		}
+		@keyframes moving{
+			0% {
+	        	filter: opacity(0);
+		    }
+		
+		    33% {
+		        filter: opacity(1);
+		    }
+		
+		    66% {
+		        filter: opacity(1);
+		    }
+		
+		    100% {
+		        filter: opacity(0);
+		    }
+		}
+		.loader span {
+		    animation-delay: calc((var(--n) - 10) * 0.2s)
+		}
+		
+		.loader span:nth-child(1) {
+		    --n: 1;
+		}
+		
+		.loader span:nth-child(2) {
+		    --n: 2;
+		}
+		
+		.loader span:nth-child(3) {
+		    --n: 3;
+		}
+		
+		.loader span:nth-child(4) {
+		    --n: 4;
+		}
+		
+		.loader span:nth-child(5) {
+		    --n: 5;
+		}
+		
+		.loader span:nth-child(6) {
+		    --n: 6;
+		}
+		
+		.loader span:nth-child(7) {
+		    --n: 7;
+		}
+		loader {
+		    position: relative;
+		}
+		
+		.loader span {
+		    position: absolute;
+		    height: 3em;
+		}
+		
+		@keyframes moving {
+		    0% {
+		        filter: opacity(0);
+		        transform: rotate(-180deg);
+		    }
+		
+		    33% {
+		        filter: opacity(1);
+		        transform: rotate(0deg);
+		    }
+		
+		    66% {
+		        filter: opacity(1);
+		        transform: rotate(0deg);
+		    }
+		
+		    100% {
+		        filter: opacity(0);
+		        transform: rotate(180deg);
+		    }
+		}
+		@keyframes moving {
+		    0% {
+		        filter: opacity(0);
+		        transform: rotate(-180deg);
+		        left: 100%;
+		    }
+		
+		    33% {
+		        filter: opacity(1);
+		        transform: rotate(0deg);
+		        left: 60%;
+		    }
+		
+		    66% {
+		        filter: opacity(1);
+		        transform: rotate(0deg);
+		        left: 40%;
+		    }
+		
+		    100% {
+		        filter: opacity(0);
+		        transform: rotate(180deg);
+		        left: 0;
+		    }
+		}
+		.loader {
+		    animation: change-color 10s linear infinite;
+		}
+		
+		@keyframes change-color {
+		    0% {
+		        color: dodgerblue;
+		    }
+		
+		    20% {
+		        color: hotpink;
+		    }
+		
+		    40% {
+		        color: gold;
+		    }
+		
+		    60% {
+		        color: mediumpurple;
+		    }
+		
+		    80% {
+		        color: lightgreen;
+		    }
+		
+		    100% {
+		        color: dodgerblue;
+		    }
+		}
+	</style>
+	<body>
+		<div class="loader">
+		    <span>l</span>
+		    <span>o</span>
+		    <span>a</span>
+		    <span>d</span>
+		    <span>i</span>
+		    <span>n</span>
+		    <span>g</span>
+		</div>
+	</body>
+</html>
