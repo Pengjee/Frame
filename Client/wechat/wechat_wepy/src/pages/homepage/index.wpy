@@ -1,0 +1,27 @@
+<style lang="less">
+  .view_container{
+    display:flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    font-size:100rpx;
+  }
+</style>
+<template>
+    <view>
+      <view class="view_container">
+        <text>移动互联网</text>
+      </view>
+      <button class="weui-btn weui-btn_primary">登录</button>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+export default class extends wepy.page {
+  config = {
+    navigationBarTitleText: '登录'
+  }
+}
+</script>

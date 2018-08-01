@@ -44,6 +44,14 @@ CreateMaze.prototype.handlestring = function() {
                     msg:WRONG_FORMAT,
                 };
             }
+            // 判定是否是字符串连通性错误
+            console.log(m[j][0],m[j][1]);
+            if(m[j][0]>this.col*2+1 || m[j][1]>this.row*2+1){
+                return {
+                    type:false,
+                    msg:CONNECTIVITY_ERROR,
+                };
+            }
         }
         // 判定是否是字符串格式错误
         if(!(m[0] && m[0].length === 2 && m[1] && m[1].length === 2)){

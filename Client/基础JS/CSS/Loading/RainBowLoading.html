@@ -5,12 +5,11 @@
 		<title>彩虹加载</title>
 	</head>
 	<style type="text/css">
-		html,body,.bows{
+		.bows{
 			height: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background: black;
 		}
 		.rainbow{
 			width: 20em;
@@ -65,7 +64,7 @@
 		  --color: mediumpurple;
 		}
 		.bows span {
-		    animation: rotating 4s infinite;
+		    animation: rotating 3s infinite;
 		    animation-delay: calc(0.05s * var(--n));
 		}
 		
@@ -77,6 +76,9 @@
 		    80%, 100% {
 		        transform: rotate(360deg);
 		    }
+		}
+		.rainbow {
+		    overflow: hidden;
 		}
 	</style>
 	<body>
