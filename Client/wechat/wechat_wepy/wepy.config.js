@@ -1,5 +1,5 @@
-const path = require('path');
-var prod = process.env.NODE_ENV === 'production';
+const path = require('path')
+var prod = process.env.NODE_ENV === 'production'
 
 module.exports = {
   wpyExt: '.wpy',
@@ -30,13 +30,16 @@ module.exports = {
     babel: {
       sourceMap: true,
       presets: [
-        'env'
+        'env',
+        'es2015',
+        'stage-1'
       ],
       plugins: [
         'transform-class-properties',
         'transform-decorators-legacy',
         'transform-object-rest-spread',
         'transform-export-extensions',
+        'syntax-export-extensions'
       ]
     }
   },
@@ -48,7 +51,6 @@ module.exports = {
 }
 
 if (prod) {
-
   // 压缩sass
   // module.exports.compilers['sass'] = {outputStyle: 'compressed'}
 
@@ -69,6 +71,7 @@ if (prod) {
           quality: 80
         }
       }
-    }
+    },
+    axios: {}
   }
 }

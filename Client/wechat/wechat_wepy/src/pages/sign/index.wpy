@@ -1,0 +1,183 @@
+<style lang="less" scoped>
+  .view_container{
+    font-size:100rpx;
+    height:100vh;
+    background-color: #D9F0EA;
+  }
+  .view_wavebox{
+    height: 40%;
+  }
+  .view_number{
+    height: 40%;
+    width: 100%;
+    padding-bottom:20%;
+    font-size:70rpx;
+    text-align: center; 
+  }
+  .view_image_box{
+    display:flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    padding-top:100rpx;
+    .img_sign_logo{
+      height: 300rpx;
+      width: 300rpx;
+    }
+  }
+  .view_signBox{
+    .btn_sign{    
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+      align-items: center;
+      width: 200rpx;
+      height: 200rpx;
+      border-radius:50%;  
+      border: none;
+    }
+  }
+  
+</style>
+<template>
+    <view>
+      <toast />
+      <view class="view_container">
+        <view class="view_wavebox">
+          <wavetitle></wavetitle>
+        </view>
+        <view>
+        <view class="view_number">
+          累积签到数:{{signSum}}
+        </view>
+        </view>
+        <view class="view_signBox">
+          <button class="btn_sign" @tap="sign">签到</button>
+        </view>
+      </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import Toast from 'wepy-com-toast'
+import WaveTitle from '@/components/WaveTitle'
+import { WIFIERRO } from '@/utils/error'
+import { UserSign, CountSign } from '@/service/sign'
+import NumberAnimateClass from '@/utils/utils'
+export default class Sign extends wepy.page {
+  config = {
+    navigationBarTitleText: '签到',
+    navigationBarBackgroundColor: '#00bfff',
+    navigationBarTextStyle: 'white',
+    backgroundColor: '#D9F0EA'
+  }
+  components = {
+    wavetitle: WaveTitle,
+    toast: Toast
+  }
+  data = {
+    imageSrc: '../../assets/sign_logo.png',
+    signSum: 0
+  }
+  onLoad () {
+    const that = this
+    this.methods.statisticSign(that)
+    this.methods.animate(that)
+  }
+  methods = {
+    getSystemInfo() {
+      try {
+        const {brand, model, system, version} = wepy.getSystemInfoSync()
+        const systemString = `brand=${brand}?model=${model}?system=${system}?version=${version}`
+        return systemString
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async getNetWork() {
+      return new Promise((resolve, reject) => {
+        wepy.startWifi({
+          success: (res) => {
+            wepy.getConnectedWifi({
+              success: ({wifi: {BSSID, SSID}}) => {
+                const networkString = `${SSID}=${BSSID}`
+                resolve(networkString)
+              },
+              fail: ({errCode, errMsg}) => {
+                wepy.showToast({
+                  title: WIFIERRO[errCode],
+                  icon: 'none',
+                  duration: 2000,
+                  mask: true
+                })
+              }
+            })
+          },
+          fial: ({errCode, errMsg}) => {
+            wepy.showToast({
+              title: errMsg,
+              icon: 'none',
+              duration: 2000,
+              mask: true
+            })
+          }
+        })
+      })
+    },
+    async sign() {
+      // const systemString = this.methods.getSystemInfo()
+      // const networkString = await this.methods.getNetWork()
+      // console.log(systemString,networkString)
+      const { id: user_id } = wepy.getStorageSync('userinfo')
+      const params = {
+        user_id,
+        systemString: 'brand=HUAWEI?model=MHA-AL00?system=Android 8.0.0?version=6.6.7',
+        networkString: 'ChinaUnicom=d4:ee:07:57:ed:a8'
+      }
+      const { code, msg } = await UserSign(params)
+      if (code !== 0) {
+        this.$invoke('toast', 'show', {
+          title: msg,
+          img: 'https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png'
+        })
+      } else {
+        this.$invoke('toast', 'show', {
+          title: msg,
+          img: 'https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png'
+        })
+      }
+    },
+    async statisticSign (that) {
+      const params = {
+        user_id: 3
+      }
+      const { data, code, msg } = await CountSign(params)
+      if (code === 0) {
+        that.signSum = data
+        that.$apply()
+      } else {
+        wepy.showToast({
+          title: msg,
+          icon: 'none',
+          duration: 2000,
+          mask: true
+        })
+      }
+    },
+    animate (that) {
+      let num = that.signSum
+      let number = new NumberAnimateClass({
+        from: num,
+        speed: 1000,
+        refreshTime: 100,
+        decimals: 0,
+        onUpdate: () => {
+          that.num = number.tempValue
+          that.$apply()
+        }
+      })
+    }
+  }
+}
+</script>

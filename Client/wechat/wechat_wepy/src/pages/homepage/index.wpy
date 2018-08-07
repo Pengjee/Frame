@@ -1,4 +1,4 @@
-<style lang="less">
+<style lang="less" scoped>
   .view_container{
     display:flex;
     flex-flow: row;
@@ -9,19 +9,53 @@
 </style>
 <template>
     <view>
-      <view class="view_container">
-        <text>移动互联网</text>
-      </view>
-      <button class="weui-btn weui-btn_primary">登录</button>
+      <button type="primary" @tap="getOpenid">获取openid</button>
+      <button type="primary" @tap="login">登录</button>
     </view>
 </template>
 
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
-export default class extends wepy.page {
+import { GetOpenid, Login } from '@/service/login'
+export default class HomePage extends wepy.page {
   config = {
-    navigationBarTitleText: '登录'
+    navigationBarTitleText: '首页'
+  }
+  methods = {
+    getOpenid() {
+      wepy.login({
+        success: async (res) => {
+          if (res.code) {
+              const params = {
+                code: res.code
+              }
+              const { data, code } = await GetOpenid(params)
+              if (code === 0) {
+                wepy.setStorageSync('openid', data)
+              }
+          }
+        }
+      })
+    },
+    async login() {
+      const params = {
+        num: 'DD',
+        password: 'DD'
+      }
+      const {code,data,msg} = await Login(params)
+      if(code == 0){
+        wepy.setStorageSync('userinfo', data)
+        wepy.setStorageSync('token',data.token)
+      }else{
+        wepy.showToast({
+          title: msg,
+          icon: 'none',
+          duration: 2000,
+          mask: true
+        })
+      }
+    }
   }
 }
 </script>

@@ -17,37 +17,40 @@ body{
 import wepy from 'wepy'
 import 'wepy-async-function'
 
-import { setStore } from 'wepy-redux'
-import configStore from './store'
-
-const store = configStore()
-setStore(store)
-
 export default class extends wepy.app {
+  constructor () {
+    super()
+    this.use('requestfix')
+  }
   // 默认全局配置
   config = {
     pages: [
-      'pages/homepage/index'
+      'pages/sign/index',
+      'pages/homepage/index',
+      'pages/mine/index'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      list: [{
+        pagePath: 'pages/homepage/index',
+        text: '首页'
+      }, {
+        pagePath: 'pages/sign/index',
+        text: '签到'
+      }, {
+        pagePath: 'pages/mine/index',
+        text: '我的'
+      }]
     }
   }
 
   globalData = {
     userInfo: null
   }
-
-  constructor () {
-    super()
-    this.use('requestfix')
-  }
-
-  onLaunch() {
-  }
-
   getUserInfo(cb) {
     const that = this
     if (this.globalData.userInfo) {

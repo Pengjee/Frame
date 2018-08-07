@@ -1,0 +1,25 @@
+<style lang="less" scoped>
+  .view_container{
+    display:flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    font-size:100rpx;
+  }
+</style>
+<template>
+    <view>
+      <view class="view_container">
+        <text>我的</text>
+      </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class Mine extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的'
+  }
+}
+</script>
